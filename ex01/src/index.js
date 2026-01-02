@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import App02 from './App02';
+import App01 from './App01';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
@@ -9,7 +11,7 @@ import Test3,{Test4, Test5} from './aaa';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <App /><App02 /><App01 />
   </React.StrictMode>
 );
 function Test1(){
