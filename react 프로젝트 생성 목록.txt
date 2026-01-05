@@ -1,0 +1,44 @@
+yarn create react-app ex03_route
+cd ex03_route
+yarn add react-router-dom
+yarn start
+
+yarn create react-app quiz_hooks
+cd quiz_hooks
+yarn add react-router-dom
+yarn start
+
+yarn create react-app ex04_form_hooks
+cd ex04_form_hooks
+yarn start
+
+
+
+---- 백엔드 설치 ---
+mkdir node_backend
+cd node_backend
+npm install body-parser --save
+npm install express --save
+npm install cors --save
+---------------------
+
+yarn create react-app ex05_hooks
+cd ex05_hooks
+yarn add react-router-dom
+yarn start
+
+yarn create react-app ex06_redux
+cd ex06_redux
+yarn add react-router-dom
+yarn add @reduxjs/toolkit react-redux
+yarn start
+
+yarn create react-app ex07_css
+cd ex07_css
+yarn add styled-components
+yarn add react-router-dom
+yarn start
+
+
+
+
