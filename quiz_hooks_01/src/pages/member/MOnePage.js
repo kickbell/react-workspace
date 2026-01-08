@@ -1,6 +1,7 @@
+import MOneCon from "../../containers/members/MOneCon";
 function MOnePage(){
     return (<>
-        MOnePage
+        <MOneCon />
     </>)
 }
 export default MOnePage;
