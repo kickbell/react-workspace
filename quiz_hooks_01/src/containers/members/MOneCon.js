@@ -9,10 +9,19 @@ function MOneCon(){
     //const result = getOne( params.get("userId") )
     //console.log( "result : ", result )
     const [data , setData] = useState()
-    useEffect( ()=>{
+    useEffect(  ()=>{
         const id = params.get("userId");
-        const result = getOne( id )
-        setData( result );
+        setData( getOne( id ) );
+        /*
+        const getData = async () => {
+            const id = params.get("userId");
+            const result = await getOne( id )
+            const data = await result.json();
+            console.log("data : ", data )
+            setData( data );
+        }
+        getData();
+        */
     } , [params] );
     const navigate = useNavigate();
     const onDelete = (userId) => {

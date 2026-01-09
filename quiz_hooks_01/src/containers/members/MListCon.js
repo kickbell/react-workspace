@@ -4,6 +4,8 @@ import { getList } from "../../service/member/member";
 function MListCon(){
     const [data, setData] = useState();
     useEffect( ()=>{
+        setData( getList() )
+        /*
         const getData = async () => {
            const res = await getList()
            console.log("res : ", res)
@@ -12,7 +14,7 @@ function MListCon(){
            setData( data )
         }
         getData();
-
+        */
     } , [] );
     return (<>
         <MListCom  data={data}/>
