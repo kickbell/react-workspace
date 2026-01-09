@@ -5,6 +5,7 @@ function HeaderCom(){
        <header>
         <Link to="/">HOME</Link> &nbsp;
         <Link to="/member/list">MEMBER</Link> &nbsp;
+        <Link to="/member/register">회원가입</Link> &nbsp;
         <hr></hr>
        </header>
        <main><Outlet /></main>

@@ -21,3 +21,11 @@ export function getOne( id ){
 export const memberDelete = (delId) => {
     data_set = data_set.filter( data => data.id !== delId )
 }
+export const register = ( user ) => {
+    //delete user.pwdChk; // 특정 키 삭제
+    data_set = data_set.concat(user)
+}
+export const modify = ( user ) => {
+    data_set = data_set.filter( data => data.id !== user.id )
+    data_set = data_set.concat( user )
+}
