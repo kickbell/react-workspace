@@ -1,15 +1,17 @@
 import { useReducer } from "react";
 import LoginCom from "../components/LoginCom";
-import { initalState, reducer } from "../moduls/member_red";
+import { initalLogin, initalState, reducer } from "../moduls/member_red";
 
 const LoginCon = () => {
     //[input, setInput] = useState({id:"",pwd:""})
-    const [ state, dispatch] = useReducer(reducer,initalState)
+    //initalLogin = { id:"", pwd:"" }
+    const [ state, dispatch] = useReducer(reducer,initalLogin)
     const onChange = ( e ) => {
-        //setInput({...input, [e.target.name]:e.target.value})
-        //console.log( e.target )
-        dispatch({type:"CHANGE_INPUT", 
-            value:e.target.value, name:e.target.name, form:"login"});
+        dispatch({
+            type:"LOGIN_INPUT", 
+            value:e.target.value, 
+            name:e.target.name 
+        });
     }
     return (<>
     <LoginCom state={state} onChange={onChange}/>
