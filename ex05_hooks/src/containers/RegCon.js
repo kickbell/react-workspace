@@ -5,6 +5,7 @@ import { register } from "../service/member";
 import {useNavigate} from "react-router-dom";
 const RegCon = () => {
     const [state, dispatch] = useReducer(reducer, initalState);
+    console.log("RegCon :", state)
     //{ id:"", pwd:"", name:"", addr:"" }
     const onChange = (e) => {
         console.log( e.target )
