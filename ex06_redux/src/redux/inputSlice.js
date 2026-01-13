@@ -4,7 +4,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const inputSlice = createSlice({
     name : "input",
     initialState : {
-        login : {id:"", pwd:""}
+        login : {id:"", pwd:""},
+        register : {id:"", pwd:"", name:"", addr:""}
     },
     reducers : {
         changeinput : (state, action) => {
@@ -20,4 +21,5 @@ const inputSlice = createSlice({
         }
     }
 })
+export const {changeinput} = inputSlice.actions
 export default inputSlice;

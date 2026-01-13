@@ -18,8 +18,12 @@ const LoginCon = () => {
         //console.log( value )
         dispatch( inputSlice.actions.changeinput({name, value, form:"login"}) )
     }
+    const onSubmit = (e) => {
+        e.preventDefault();
+        console.log(e.target)
+    }
     return (<>
-     <LoginCom onChange={onChange} username={id} pwd={pwd}/>
+     <LoginCom onSubmit={onSubmit} onChange={onChange} username={id} pwd={pwd}/>
     </>)
 }
 export default LoginCon;
