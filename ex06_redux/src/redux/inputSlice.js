@@ -29,7 +29,8 @@ const inputSlice = createSlice({
             state.error = null;
         })
         .addCase(loginThunk.fulfilled,(state, action) => {
-            console.log("fulfilled action : ", action)
+            //console.log("fulfilled action : ", action)
+            state.result = action.payload
             state.loading = false;
             state.error = null;
             

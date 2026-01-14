@@ -13,6 +13,6 @@ export const loginThunk = createAsyncThunk(
             headers : {"Content-Type":"application/json"} , //데이터 처리 방식 지정
             body :  JSON.stringify(user) // header에 지정된 방식으로 데이터를 포장해서 보냄
         } )
-        return "돌려주는값";
+        return await res.json();
     }
 );
