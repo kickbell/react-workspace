@@ -4,6 +4,7 @@ import inputSlice from "../redux/inputSlice";
 import { loginThunk } from "../service/authThunk";
 import { useEffect } from "react";
 import {useNavigate} from "react-router-dom"
+import { login } from "../redux/authSlice";
 const LoginCon = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -23,6 +24,7 @@ const LoginCon = () => {
         e.preventDefault();
         const resultThunk = await dispatch( loginThunk( {id:id, pwd } ) )
         if( resultThunk.payload === 0 ){
+            dispatch( login( {username:id} ) )
             navigate("/")
         }
     }
