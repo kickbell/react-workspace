@@ -30,7 +30,6 @@ const inputSlice = createSlice({
             state.result = action.payload
             state.loading = false;
             state.error = null;
-            
         })
         /*
         .addCase(loginThunk.pending,(state) => {

@@ -22,6 +22,7 @@ const LoginCon = () => {
     }
     const onSubmit = async (e) => {
         e.preventDefault();
+        console.log( e.target )
         const resultThunk = await dispatch( loginThunk( {id:id, pwd } ) )
         if( resultThunk.payload === 0 ){
             dispatch( login( {username:id} ) )
