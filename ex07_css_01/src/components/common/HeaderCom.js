@@ -1,11 +1,14 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 const WrapBlock = styled.div`
-    position: fixed; width: 100%;
+    position: fixed; 
+    z-index : 1;
+    background-color : white;
+    width: 100%;
     border-bottom: 1px solid rgba(0,0,0,0.1);
 `;
 const StyleHeader = styled.header`
-    background-color: gold;
+  
     margin: 0 auto; width: 1100px;
     display: flex; height: 100px; align-items: center;
 `;
