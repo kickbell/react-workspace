@@ -36,8 +36,20 @@ export const loginThunk = createAsyncThunk(
 export const registerThunk = createAsyncThunk(
   "registerThunk", 
   async ( user ) => {
-    data_set = data_set.concat( user )
-    return { result : 0 }
+    const res = await fetch(path+"/members", {
+      method : "post",
+      body : user
+    })
+    if( res.ok )
+      return { result : 0 }
+    
+    const errorMsg = await res.json();
+    throw new Error( errorMsg );
+
+    //if( res.status === 409 ){}
+    //if( res.status === 401 ){}
+    //data_set = data_set.concat( user )
+    //return { result : 0 }
   }
 );
 

@@ -16,7 +16,7 @@ const RegCom = ({onChange, onSubmit,username, password, role}) => {
                                 placeholder="input role"/>
             <StyleButton>회원 가입</StyleButton>
         </StyleForm>
-
+        {로딩중, 에러, }
     </>)    
 }
 export default RegCom;

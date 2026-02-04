@@ -16,11 +16,13 @@ const RegCon = () => {
     const onSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData(e.target)
-        const userData = Object.fromEntries( formData.entries() )
-        const {payload} = await dispatch( registerThunk(userData) )
+        formData.append("id", 1000)
+
+        //const userData = Object.fromEntries( formData.entries() )
+        const {payload} = await dispatch( registerThunk(formData) )
         // payload = { result : 0 }
         console.log( payload )
-        if( payload.result === 0 )
+        if( payload?.result === 0 )
             navigate("/login")
     }
     return (<>

@@ -29,8 +29,8 @@ const ModifyCon = () => {
         e.preventDefault();
         const formData = new FormData(e.target);
         const userData = Object.fromEntries( formData )
-        console.log("dataOne.id : ", dataOne.id)
-        console.log("userData : ", userData)
+        //console.log("dataOne.id : ", dataOne.id)
+        //console.log("userData : ", userData)
         dispatch( memberModifyThunk( { id:dataOne.id, formData } ) );
         navigate("/info/"+dataOne.id);
     }
