@@ -14,13 +14,11 @@ const ModifyCon = () => {
     const {dataOne} = useSelector(state => state.memberData )
    
     useEffect(()=>{
-        dispatch(memberOneThunk({username : params.username}));
-    },[dispatch, params])
-    
-    useEffect(()=>{
         if( dataOne )
             dispatch( setModifyData(dataOne) )
-    },[dispatch, dataOne])
+        else
+            dispatch(memberOneThunk({username : params.username}));
+    },[dispatch, params, dataOne])
 
     const onChange = (e) => {
         const {name, value} = e.target
@@ -31,8 +29,10 @@ const ModifyCon = () => {
         e.preventDefault();
         const formData = new FormData(e.target);
         const userData = Object.fromEntries( formData )
-        dispatch( memberModifyThunk(userData) );
-        navigate("/info/"+userData.username);
+        console.log("dataOne.id : ", dataOne.id)
+        console.log("userData : ", userData)
+        dispatch( memberModifyThunk( { id:dataOne.id, formData } ) );
+        navigate("/info/"+dataOne.id);
     }
     return (<>
         <ModifyCom onChange={onChange} onSubmit={onSubmit}

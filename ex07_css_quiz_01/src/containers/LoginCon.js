@@ -4,6 +4,7 @@ import LoginCom from "../components/LoginCom";
 import {changeInput} from "../redux/inputSlice"
 import {loginThunk} from "../service/authThunk"
 import {useNavigate} from "react-router-dom"
+import { useEffect } from "react";
 const LoginCon = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -21,9 +22,12 @@ const LoginCon = () => {
         e.preventDefault();
         dispatch( loginThunk({username, password}) );
     }
-    if( isLoggedIn ){
-        navigate("/")
-    }
+    useEffect( () => {
+        if( isLoggedIn ){
+            navigate("/")
+        }
+    },[isLoggedIn,navigate]);
+    
     return (<>
        
         <LoginCom loading={loading} error={error} result={result} onSubmit={onSubmit} onChange={onChange} username={username} password={password} />

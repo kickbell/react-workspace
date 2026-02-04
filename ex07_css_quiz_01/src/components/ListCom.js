@@ -13,6 +13,7 @@ const DivContent = styled.div`
     border-bottom : 1px solid gray; padding : 15px;
 `;
 const ListCom = ({data, onInfo }) => {
+    //console.log( "lisg com : ", data )
     return (<>
 
                 <ListTitle>회 원 목 록</ListTitle>
@@ -23,7 +24,7 @@ const ListCom = ({data, onInfo }) => {
                     {data && data.map( d => (
                         <DivContent key={d.username}>
                 <span style={{cursor:"pointer"}}
-                            onClick={ () => onInfo(d.username)} >{d.username}</span>
+                            onClick={ () => onInfo(d.id)} >{d.username}</span>
                             <span>{d.password}</span>
                             <span>{d.role}</span>
                         </DivContent>) 
