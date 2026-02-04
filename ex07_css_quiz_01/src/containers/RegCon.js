@@ -7,6 +7,12 @@ import { useNavigate } from "react-router-dom";
 const RegCon = () => {
     const {username, password, role} = 
                         useSelector(state => state.input.register);
+    
+    const {error, loading} = useSelector( state => {
+        console.log("reg con state => ", state)
+        return state.auth;
+    });
+
     const dispatch = useDispatch();
     const onChange = (e) => {
         const {name, value} = e.target
@@ -21,12 +27,13 @@ const RegCon = () => {
         //const userData = Object.fromEntries( formData.entries() )
         const {payload} = await dispatch( registerThunk(formData) )
         // payload = { result : 0 }
-        console.log( payload )
+        console.log( "payload => ", payload )
         if( payload?.result === 0 )
             navigate("/login")
     }
     return (<>
-        <RegCom onChange={onChange} onSubmit={onSubmit}
+        <RegCom error={error} loading={loading}
+        onChange={onChange} onSubmit={onSubmit}
             username={username} password={password} role={role} />
     </>)    
 }

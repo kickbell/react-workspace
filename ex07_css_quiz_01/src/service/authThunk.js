@@ -36,14 +36,14 @@ export const loginThunk = createAsyncThunk(
 export const registerThunk = createAsyncThunk(
   "registerThunk", 
   async ( user ) => {
+    console.log("실행")
     const res = await fetch(path+"/members", {
       method : "post",
       body : user
-    })
+    })  
     if( res.ok )
       return { result : 0 }
-    
-    const errorMsg = await res.json();
+    const errorMsg = await res.text();
     throw new Error( errorMsg );
 
     //if( res.status === 409 ){}
