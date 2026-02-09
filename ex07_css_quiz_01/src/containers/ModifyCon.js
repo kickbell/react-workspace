@@ -10,9 +10,9 @@ const ModifyCon = () => {
     const params = useParams();
 
     const dispatch = useDispatch();
-    const {username, password, role} = useSelector(state => state.input.modify )
+    const {username, password, role, fileName} = useSelector(state => state.input.modify )
     const {dataOne} = useSelector(state => state.memberData )
-   
+    console.log("data one : ", dataOne )
     useEffect(()=>{
         if( dataOne )
             dispatch( setModifyData(dataOne) )
@@ -35,7 +35,7 @@ const ModifyCon = () => {
         navigate("/info/"+dataOne.id);
     }
     return (<>
-        <ModifyCom onChange={onChange} onSubmit={onSubmit}
+        <ModifyCom fileName={fileName} onChange={onChange} onSubmit={onSubmit}
             username={username} password={password} role={role} />
     </>)
 }
