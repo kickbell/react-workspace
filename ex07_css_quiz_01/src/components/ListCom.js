@@ -12,8 +12,28 @@ const DivContent = styled.div`
     display : flex; justify-content : space-between;
     border-bottom : 1px solid gray; padding : 15px;
 `;
-const ListCom = ({data, onInfo }) => {
+const DivPage = styled.div`
+    margin-top : 20px;
+    text-align : center;
+`;
+const SpanPage = styled.span`
+    &:hover{ color : yellow; }
+    width : 30px; display : inline-block;
+    cursor : pointer;
+    color : ${(props) => ( props.$active ? "red" : "black") };
+`;
+const ListCom = ({onClick, data, onInfo }) => {
     //console.log( "lisg com : ", data )
+    let number = [];
+    if( data !== null){
+        for(let i=1 ; i <= data.totalPage ; i++){
+            number.push(<SpanPage 
+                                key={i} $active={i===data.currentPage} 
+                                onClick={ ()=>onClick(i) }>{i}</SpanPage>)
+        }
+        number.push(<b key="page-info">({data.currentPage} / {data.totalPage})</b>)
+    }
+
     return (<>
 
                 <ListTitle>회 원 목 록</ListTitle>
@@ -21,7 +41,7 @@ const ListCom = ({data, onInfo }) => {
                     <DivContent>
                         <b>아이디</b><b>비밀번호</b><b>ROLE</b>
                     </DivContent>
-                    {data && data.map( d => (
+                    {data && data.list.map( d => (
                         <DivContent key={d.username}>
                 <span style={{cursor:"pointer"}}
                             onClick={ () => onInfo(d.id)} >{d.username}</span>
@@ -29,6 +49,7 @@ const ListCom = ({data, onInfo }) => {
                             <span>{d.role}</span>
                         </DivContent>) 
                     )}
+                    <DivPage>{ number }</DivPage>
                 </DivWrap>
                 
   

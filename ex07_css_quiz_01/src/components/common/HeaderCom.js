@@ -1,8 +1,10 @@
 import { Link, Outlet } from "react-router-dom";
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux"
-import authSlice from "../../redux/authSlice";
+import authSlice, { initState } from "../../redux/authSlice";
 import { StyleContentBlock, StyleContentWrap } from "./StyleContent";
+import { useEffect } from "react";
+import { initInput } from "../../redux/inputSlice";
 const WrapBlock = styled.div`
     position: fixed; 
     z-index : 1;
@@ -31,6 +33,7 @@ const StyleNav = styled.nav`
 const HeaderCom = () => {
     const {isLoggedIn, username} = useSelector( state => state.auth );
     const dispatch = useDispatch();
+
     const onLogout = (e) => {
         e.preventDefault();
         dispatch( authSlice.actions.logout() );

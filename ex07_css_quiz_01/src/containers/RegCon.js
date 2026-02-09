@@ -4,6 +4,8 @@ import HeaderCom from "../components/common/HeaderCom";
 import {changeInput} from "../redux/inputSlice"
 import { registerThunk } from "../service/authThunk";
 import { useNavigate } from "react-router-dom";
+import { initState } from "../redux/authSlice";
+import { useEffect } from "react";
 const RegCon = () => {
     const {username, password, role} = 
                         useSelector(state => state.input.register);
@@ -14,6 +16,11 @@ const RegCon = () => {
     });
 
     const dispatch = useDispatch();
+        
+    useEffect( ()=>{
+        dispatch( initState() )
+    },[dispatch])
+
     const onChange = (e) => {
         const {name, value} = e.target
         dispatch( changeInput({name, value, form:"register"}) )

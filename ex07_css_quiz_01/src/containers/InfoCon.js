@@ -16,9 +16,9 @@ const InfoCon = () => {
         dispatch( memberOneThunk({username}) )
     }, [dispatch, username])
     const navigate = useNavigate();
-    const onDelete = () => {
+    const onDelete = async () => {
         //console.log("dataOne : ", dataOne)
-        dispatch( memberDeleteThunk({ username : dataOne.id }) );
+        await dispatch( memberDeleteThunk({ username : dataOne.id }) );
         navigate("/list")
     }
     const onModifyForm = () => {

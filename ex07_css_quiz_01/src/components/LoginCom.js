@@ -30,7 +30,7 @@ const LoginCom = ( {loading, error, result, onSubmit , onChange, username, passw
                     ? <>로그인 중...</>
                     :error && <>{error}</> 
                 }
-                {result === 1 && <p>아이디 또는 비번 틀림</p>}
+                {result !== 0 && <p>아이디 또는 비번 틀림</p>}
             </StyledForm>
         </LoginBox>
     </AuthBlock>)

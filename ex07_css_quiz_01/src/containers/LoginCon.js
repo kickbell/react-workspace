@@ -1,12 +1,21 @@
 import { useDispatch, useSelector } from "react-redux";
 import HeaderCom from "../components/common/HeaderCom";
 import LoginCom from "../components/LoginCom";
-import {changeInput} from "../redux/inputSlice"
+import {changeInput, initInput} from "../redux/inputSlice"
 import {loginThunk} from "../service/authThunk"
 import {useNavigate} from "react-router-dom"
 import { useEffect } from "react";
+import { initState } from "../redux/authSlice";
 const LoginCon = () => {
     const dispatch = useDispatch();
+    
+    useEffect( ()=>{
+        dispatch( initInput() )
+        dispatch( initState() )
+    },[dispatch])
+
+
+    
     const navigate = useNavigate();
     const {username, password} = useSelector( state => {
         return state.input.login;

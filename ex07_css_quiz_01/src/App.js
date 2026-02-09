@@ -10,6 +10,10 @@ import InfoCom from './components/InfoCom';
 import InfoCon from './containers/InfoCon';
 import HeaderCom from './components/common/HeaderCom';
 import ModifyCon from './containers/ModifyCon';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { initState } from './redux/authSlice';
+import { initInput } from './redux/inputSlice';
 
 function App() {
   return (<>

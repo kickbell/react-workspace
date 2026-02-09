@@ -14,7 +14,8 @@ const authSlice = createSlice({
         logout : (state) => {
             sessionStorage.clear();
             return initialState;   
-        }
+        },
+        initState : (state) => initialState
     },
     extraReducers : (builder) => {
         builder
@@ -39,6 +40,6 @@ const authSlice = createSlice({
         createLoadingReducers(builder, registerThunk)
     }
 })
-export const {logout} = authSlice.actions
+export const {logout, initState} = authSlice.actions
 
 export default authSlice;

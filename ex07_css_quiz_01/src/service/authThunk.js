@@ -55,11 +55,12 @@ export const registerThunk = createAsyncThunk(
 
 export const memberThunk = createAsyncThunk(
   "memberThunk", 
-  async ( ) => {
-    const res = await fetch(path + "/members", {method:"get"} );
+  async ( start ) => {
+    const res = await fetch(path + "/members?start="+( start-1), {method:"get"} );
     console.log( res )
-    //if( res.ok )
-    return await res.json()
+    if( res.ok )
+      return await res.json();
+    return null;
     //throw new Error();
     //return data_set;
   }
