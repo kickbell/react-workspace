@@ -9,12 +9,18 @@ const InfoWrap = styled.div`
     font-size : 24px;
     padding : 20px;
 `;
-const InfoCom = ({data, onDelete, onModifyForm}) => {
+const InfoCom = ({imageUrl, data, onDelete, onModifyForm}) => {
     return (<>
 
             <ProductTitle>개 인 정 보</ProductTitle>
             <InfoWrap>
                 { data && <>
+                    {imageUrl && (
+                        <>
+                <img src={imageUrl} width="100px" height="100px" alt="User Profile" />
+                <hr />
+                        </>
+                    )}
                     username<br />
                     - {data.username}<hr />
                     password<br />

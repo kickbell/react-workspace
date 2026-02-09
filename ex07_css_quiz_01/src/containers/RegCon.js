@@ -22,6 +22,7 @@ const RegCon = () => {
     },[dispatch])
 
     const onChange = (e) => {
+        console.log("reg con onchange : ", e.target)
         const {name, value} = e.target
         dispatch( changeInput({name, value, form:"register"}) )
     }
@@ -29,9 +30,8 @@ const RegCon = () => {
     const onSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData(e.target)
-        formData.append("id", 1000)
+        //formData.append("id", 1000)
 
-        //const userData = Object.fromEntries( formData.entries() )
         const {payload} = await dispatch( registerThunk(formData) )
         // payload = { result : 0 }
         console.log( "payload => ", payload )

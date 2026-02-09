@@ -17,10 +17,10 @@ const DivPage = styled.div`
     text-align : center;
 `;
 const SpanPage = styled.span`
-    &:hover{ color : yellow; }
     width : 30px; display : inline-block;
     cursor : pointer;
     color : ${(props) => ( props.$active ? "red" : "black") };
+    &:hover{ font-weight: bold; }
 `;
 const ListCom = ({onClick, data, onInfo }) => {
     //console.log( "lisg com : ", data )

@@ -33,12 +33,14 @@ export const loginThunk = createAsyncThunk(
     */
   }
 );
+
 export const registerThunk = createAsyncThunk(
   "registerThunk", 
   async ( user ) => {
     console.log("실행")
     const res = await fetch(path+"/members", {
       method : "post",
+      //headers : {contenttype : application/json }
       body : user
     })  
     if( res.ok )
@@ -82,7 +84,8 @@ export const memberDeleteThunk = createAsyncThunk(
   "memberDeleteThunk", 
   async ( user ) => { //{username : aaa}
     const res = await fetch(path+"/members/"+user.username, {
-      method : "delete"
+      method : "delete",
+      body : user.fileName
     } )
     if( res.ok )
       return 1;
