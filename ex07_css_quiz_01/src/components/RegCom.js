@@ -13,8 +13,8 @@ const RegCom = ({ error, loading, onChange, onSubmit,username, password, role}) 
                                 placeholder="input username"/>
             <StyleInput name="password" value={password} onChange={onChange} 
                                 placeholder="input password"/>
-            <StyleInput name="role" value={role} onChange={onChange} 
-                                placeholder="input role"/>
+            {/* <StyleInput name="role" value={role} onChange={onChange}  */}
+                                {/* placeholder="input role"/> */}
             <StyleInput type="file" name="file" onChange={onchange} />
             
             <StyleButton>회원 가입</StyleButton>
