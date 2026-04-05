@@ -29,6 +29,7 @@ const LoginCon = () => {
     }
     const onSubmit = (e) => {
         e.preventDefault();
+        console.log("[LOGIN SUBMIT]", { username, password });
         dispatch( loginThunk({username, password}) );
     }
     useEffect( () => {
