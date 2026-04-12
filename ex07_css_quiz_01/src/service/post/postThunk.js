@@ -14,15 +14,8 @@ const withBearer = (token) => {
 
 export const postThunk = createAsyncThunk(
   "postThunk",
-  async ( _, thunkAPI ) => {
-    const token = getToken(thunkAPI);
-    const headers = {
-      "Content-Type": "application/json"
-    };
-    if (token) {
-      headers["Authorization"] = withBearer(token);
-    }
-    const res = await fetch(path + "/post", { headers })
+  async ( ) => {
+    const res = await fetch(path + "/post")
     if( res.ok )
       return res.json();
     if( res.status === 404 )

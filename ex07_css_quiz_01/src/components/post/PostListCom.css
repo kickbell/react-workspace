@@ -1,0 +1,108 @@
+.post-list-page {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.post-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.post-list-header h2 {
+  margin: 0;
+  font-size: 20px;
+  color: #1f2328;
+  letter-spacing: -0.02em;
+}
+
+.post-list-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  background: #fff;
+  border: 1px solid #e5e8ee;
+  border-radius: 10px;
+}
+
+.post-list-table-wrap::-webkit-scrollbar {
+  height: 10px;
+}
+
+.post-list-table-wrap::-webkit-scrollbar-thumb {
+  background: #d5dbe3;
+  border-radius: 999px;
+}
+
+.post-list-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+}
+
+.post-list-table thead tr {
+  background: #f8fafc;
+}
+
+.post-list-table th,
+.post-list-table td {
+  border-bottom: 1px solid #edf1f5;
+  padding: 13px 14px;
+  font-size: 14px;
+}
+
+.post-list-table th {
+  color: #5b6572;
+  font-weight: 700;
+  text-align: center;
+}
+
+.post-list-table tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+.post-list-table tbody tr:hover {
+  background-color: #f8fbff;
+}
+
+.post-list-table td:first-child,
+.post-list-table th:first-child {
+  width: 90px;
+  text-align: center;
+}
+
+.post-list-table td:last-child,
+.post-list-table th:last-child {
+  width: 190px;
+}
+
+.post-list-table td:nth-child(2) {
+  text-align: left;
+}
+
+.post-list-table td:nth-child(3) {
+  text-align: center;
+  color: #6b7280;
+  white-space: nowrap;
+}
+
+.post-list-title-link {
+  color: #1f6feb;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.post-list-title-link:hover {
+  text-decoration: underline;
+}
+
+.post-list-empty {
+  padding: 20px;
+  text-align: center;
+  color: #6b7280;
+  background: #fff;
+  border: 1px solid #e6ebf1;
+  border-radius: 10px;
+}

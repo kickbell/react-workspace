@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { postButtonLinkStyle } from "./postStyles";
+import "./PostListCom.css";
 
 const formatDateTime = (value) => {
   if (!value) return "-";
@@ -10,60 +11,39 @@ const formatDateTime = (value) => {
 
 function PostListCom({ posts }) {
   if (!posts || posts.length === 0) {
-    return <div style={{ padding: "20px", textAlign: "center" }}>저장된 게시물이 없습니다.</div>;
+    return <div className="post-list-page"><div className="post-list-empty">저장된 게시물이 없습니다.</div></div>;
   }
 
   return (
-    <div style={{ padding: "20px" }}>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+    <div className="post-list-page">
+      <div className="post-list-header">
         <h2>게시물 목록</h2>
         <Link to="/post/register" style={postButtonLinkStyle}>글 등록</Link>
       </div>
-      <table
-        style={{
-          width: "100%",
-          borderCollapse: "collapse",
-          marginTop: "12px",
-          backgroundColor: "#fff",
-        }}
-      >
-        <thead>
-          <tr style={{ backgroundColor: "#f5f7fa" }}>
-            <th style={{ border: "1px solid #d9dde3", padding: "10px" }}>번호</th>
-            <th style={{ border: "1px solid #d9dde3", padding: "10px" }}>제목</th>
-            <th style={{ border: "1px solid #d9dde3", padding: "10px" }}>작성자</th>
-            <th style={{ border: "1px solid #d9dde3", padding: "10px" }}>userId</th>
-            <th style={{ border: "1px solid #d9dde3", padding: "10px" }}>조회수</th>
-            <th style={{ border: "1px solid #d9dde3", padding: "10px" }}>작성시간</th>
-          </tr>
-        </thead>
-        <tbody>
-          {posts.map((post, index) => (
-            <tr key={post.id ?? post.postId ?? index}>
-              <td style={{ border: "1px solid #e2e6ec", padding: "10px", textAlign: "center", width: "90px" }}>
-                {post.id ?? post.postId ?? index + 1}
-              </td>
-              <td style={{ border: "1px solid #e2e6ec", padding: "10px", width: "220px" }}>
-                <Link to={`/post/detail/${post.id ?? post.postId}`}>
-                  {post.title ?? "-"}
-                </Link>
-              </td>
-              <td style={{ border: "1px solid #e2e6ec", padding: "10px", width: "150px", textAlign: "center" }}>
-                {post.memberUserName ?? post.username ?? post.writer ?? "-"}
-              </td>
-              <td style={{ border: "1px solid #e2e6ec", padding: "10px", textAlign: "center", width: "90px" }}>
-                {post.memberUserId ?? "-"}
-              </td>
-              <td style={{ border: "1px solid #e2e6ec", padding: "10px", textAlign: "center", width: "90px" }}>
-                {post.postCount ?? 0}
-              </td>
-              <td style={{ border: "1px solid #e2e6ec", padding: "10px", width: "180px" }}>
-                {formatDateTime(post.createdAt)}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+        <div className="post-list-table-wrap">
+          <table className="post-list-table">
+            <thead>
+              <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>작성시간</th>
+              </tr>
+            </thead>
+            <tbody>
+              {posts.map((post, index) => (
+                <tr key={post.id ?? post.postId ?? index}>
+                  <td>{post.id ?? post.postId ?? index + 1}</td>
+                  <td>
+                    <Link className="post-list-title-link" to={`/post/detail/${post.id ?? post.postId}`}>
+                      {post.title ?? "-"}
+                    </Link>
+                  </td>
+                  <td>{formatDateTime(post.createdAt)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
     </div>
   );
 }
