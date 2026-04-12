@@ -9,7 +9,7 @@ const formatDateTime = (value) => {
   return d.toLocaleString();
 };
 
-function PostListCom({ posts }) {
+function PostListCom({ posts, onToggleLike }) {
   if (!posts || posts.length === 0) {
     return <div className="post-list-page"><div className="post-list-empty">저장된 게시물이 없습니다.</div></div>;
   }
@@ -26,6 +26,10 @@ function PostListCom({ posts }) {
               <tr>
                 <th>번호</th>
                 <th>제목</th>
+                <th>작성자</th>
+                <th>좋아요</th>
+                <th>좋아요 수</th>
+                <th>조회수</th>
                 <th>작성시간</th>
               </tr>
             </thead>
@@ -38,6 +42,20 @@ function PostListCom({ posts }) {
                       {post.title ?? "-"}
                     </Link>
                   </td>
+                  <td>{post.username ?? post.memberUserName ?? "-"}</td>
+                  <td>
+                    <button
+                      type="button"
+                      className="post-like-button"
+                      onClick={() => onToggleLike?.(post)}
+                      aria-label={post.liked ? "좋아요 취소" : "좋아요"}
+                      title={post.liked ? "좋아요 취소" : "좋아요"}
+                    >
+                      {post.liked ? "❤️" : "🤍"}
+                    </button>
+                  </td>
+                  <td>{post.likedCount ?? 0}</td>
+                  <td>{post.count ?? 0}</td>
                   <td>{formatDateTime(post.createdAt)}</td>
                 </tr>
               ))}

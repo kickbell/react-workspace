@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { postDeleteThunk, postModifyThunk, postOneThunk, postRegisterThunk, postThunk } from "../../service/post/postThunk";
+import { postDeleteThunk, postLikedThunk, postModifyThunk, postOneThunk, postRegisterThunk, postThunk } from "../../service/post/postThunk";
 import { createLoadingReducers } from "../commonLoadingHandlers";
 
 const initialState = { data : null, dataOne : null, loading : false, error : null, deleteResult: 0, registerResult: 0, modifyResult: 0 }
@@ -49,11 +49,39 @@ const postDataSlice = createSlice({
       }
     })
 
+    builder
+    .addCase(postLikedThunk.fulfilled, (state, action) => {
+      state.loading = false;
+      state.error = null;
+      const { postId, liked, delta } = action.payload || {};
+
+      if (Array.isArray(state.data)) {
+        state.data = state.data.map((item) => {
+          const itemId = Number(item.id ?? item.postId);
+          if (itemId !== Number(postId)) return item;
+          return {
+            ...item,
+            liked,
+            likedCount: Math.max(0, Number(item.likedCount ?? 0) + Number(delta ?? 0)),
+          };
+        });
+      }
+
+      if (state.dataOne && Number(state.dataOne.id ?? state.dataOne.postId) === Number(postId)) {
+        state.dataOne = {
+          ...state.dataOne,
+          liked,
+          likedCount: Math.max(0, Number(state.dataOne.likedCount ?? 0) + Number(delta ?? 0)),
+        };
+      }
+    })
+
     createLoadingReducers(builder, postThunk)
     createLoadingReducers(builder, postOneThunk)
     createLoadingReducers(builder, postDeleteThunk)
     createLoadingReducers(builder, postRegisterThunk)
     createLoadingReducers(builder, postModifyThunk)
+    createLoadingReducers(builder, postLikedThunk)
   }
 })
 export default postDataSlice;

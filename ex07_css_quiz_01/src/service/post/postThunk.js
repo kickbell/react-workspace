@@ -4,8 +4,9 @@ import { service_path } from "../service_ip_port";
 const path = service_path;
 const getToken = (thunkAPI) => {
   const tokenFromState = thunkAPI.getState().auth?.token;
-  const tokenFromSession = JSON.parse(sessionStorage.getItem("auth") || "{}").token;
-  return tokenFromState || tokenFromSession;
+  const tokenFromSessionAuth = JSON.parse(sessionStorage.getItem("auth") || "{}").token;
+  const tokenFromSessionRaw = sessionStorage.getItem("token");
+  return tokenFromState || tokenFromSessionAuth || tokenFromSessionRaw;
 };
 const withBearer = (token) => {
   if (!token) return "";
@@ -164,5 +165,61 @@ export const postModifyThunk = createAsyncThunk(
     }
 
     throw new Error("게시글 수정 API 경로를 찾지 못했습니다");
+  }
+);
+
+
+export const postLikedThunk = createAsyncThunk(
+  "postLikedThunk",
+  async ( like, thunkAPI ) => { // { postId: 번호, liked: boolean }
+    const token = getToken(thunkAPI);
+    if (!token) {
+      throw new Error("로그인 먼저 하세요");
+    }
+
+    const endpoint = `${path}/post/${like.postId}/like`;
+    const callLikeApi = async (method) => {
+      const options = {
+        method,
+        headers: {
+          "accept": "*/*",
+          "Authorization": withBearer(token),
+        },
+      };
+      if (method === "post") {
+        options.body = "";
+      }
+      return fetch(endpoint, options);
+    };
+
+    // 기본: false(미좋아요) -> POST(추가), true(좋아요) -> DELETE(취소)
+    const primaryMethod = like.liked ? "delete" : "post";
+    const fallbackMethod = primaryMethod === "post" ? "delete" : "post";
+
+    let res = await callLikeApi(primaryMethod);
+    // 일부 백엔드는 메서드 의미를 반대로 구현할 수 있어 1회 재시도
+    if (!res.ok && (res.status === 401 || res.status === 404 || res.status === 405)) {
+      res = await callLikeApi(fallbackMethod);
+    }
+
+    if (res.status === 401) {
+      throw new Error("로그인 먼저 하세요");
+    }
+    if (res.status === 403) {
+      throw new Error("좋아요 권한이 없습니다");
+    }
+    if (res.status === 404) {
+      throw new Error("게시글이 없습니다");
+    }
+    if (!res.ok) {
+      const errorText = await res.text();
+      throw new Error(errorText || "좋아요 처리 실패");
+    }
+
+    return {
+      postId: Number(like.postId),
+      liked: !like.liked,
+      delta: like.liked ? -1 : 1,
+    };
   }
 );
