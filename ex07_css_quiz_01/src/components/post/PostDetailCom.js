@@ -7,7 +7,7 @@ const formatDateTime = (value) => {
   return d.toLocaleString();
 };
 
-function PostDetailCom({ post, loading, error }) {
+function PostDetailCom({ post, loading, error, onDelete }) {
   if (loading) {
     return <div style={{ padding: "20px", textAlign: "center" }}>불러오는 중...</div>;
   }
@@ -64,7 +64,21 @@ function PostDetailCom({ post, loading, error }) {
         </tbody>
       </table>
 
-      <div style={{ marginTop: "16px", display: "flex", justifyContent: "flex-end" }}>
+      <div style={{ marginTop: "16px", display: "flex", justifyContent: "flex-end", gap: "10px" }}>
+        <button
+          type="button"
+          onClick={onDelete}
+          style={{
+            border: "1px solid #d11a2a",
+            color: "#d11a2a",
+            backgroundColor: "#fff",
+            padding: "6px 12px",
+            borderRadius: "6px",
+            cursor: "pointer"
+          }}
+        >
+          삭제
+        </button>
         <Link to="/post/list">목록으로</Link>
       </div>
     </div>
