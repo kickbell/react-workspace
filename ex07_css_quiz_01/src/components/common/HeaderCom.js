@@ -49,6 +49,7 @@ const HeaderCom = () => {
                         <li><Link to="/">사료</Link></li>
                         <li><Link to="/">간식</Link></li>
                         <li><Link to="/list">목록보기</Link></li>
+                        <li><Link to="post/list">게시판</Link></li>
                     </ul>
                     <ul>
                         {isLoggedIn

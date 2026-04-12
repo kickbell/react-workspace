@@ -10,6 +10,7 @@ import InfoCom from './components/InfoCom';
 import InfoCon from './containers/InfoCon';
 import HeaderCom from './components/common/HeaderCom';
 import ModifyCon from './containers/ModifyCon';
+import PostListCon from './containers/post/PostListCon';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { initState } from './redux/authSlice';
@@ -25,6 +26,11 @@ function App() {
         <Route path='/list' element={<ListCon />}/>
         <Route path='/info/:username' element={<InfoCon />}/>
         <Route path='/modify/:username' element={<ModifyCon />}/>
+
+        <Route path='/post'>
+          <Route path='list' element={<PostListCon />}/>
+        </Route>
+
       </Route>
     </Routes>
   </>);
