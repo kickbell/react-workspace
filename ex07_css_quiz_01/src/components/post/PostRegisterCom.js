@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { postButtonPrimaryStyle, postButtonSecondaryStyle } from "./postStyles";
 
 function PostRegisterCom({ title, content, loading, error, onChange, onSubmit }) {
   return (
@@ -33,17 +34,14 @@ function PostRegisterCom({ title, content, loading, error, onChange, onSubmit })
         {error ? <div style={{ color: "crimson" }}>{error}</div> : null}
 
         <div style={{ display: "flex", justifyContent: "flex-end", gap: "10px" }}>
-          <Link to="/post/list">취소</Link>
+          <Link to="/post/list" style={postButtonSecondaryStyle}>취소</Link>
           <button
             type="submit"
             disabled={loading}
             style={{
-              border: "1px solid #1f6feb",
-              backgroundColor: "#1f6feb",
-              color: "#fff",
-              padding: "7px 14px",
-              borderRadius: "6px",
-              cursor: loading ? "not-allowed" : "pointer"
+              ...postButtonPrimaryStyle,
+              cursor: loading ? "not-allowed" : "pointer",
+              opacity: loading ? 0.8 : 1,
             }}
           >
             {loading ? "등록 중..." : "등록"}

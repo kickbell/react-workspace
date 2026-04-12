@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { postButtonLinkStyle } from "./postStyles";
 
 const formatDateTime = (value) => {
   if (!value) return "-";
@@ -16,7 +17,7 @@ function PostListCom({ posts }) {
     <div style={{ padding: "20px" }}>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <h2>게시물 목록</h2>
-        <Link to="/post/register">게시글 추가하기</Link>
+        <Link to="/post/register" style={postButtonLinkStyle}>글 등록</Link>
       </div>
       <table
         style={{

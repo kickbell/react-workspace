@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { postButtonDangerStyle, postButtonPrimaryStyle, postButtonSecondaryStyle } from "./postStyles";
 
 const formatDateTime = (value) => {
   if (!value) return "-";
@@ -65,22 +66,15 @@ function PostDetailCom({ post, loading, error, onDelete }) {
       </table>
 
       <div style={{ marginTop: "16px", display: "flex", justifyContent: "flex-end", gap: "10px" }}>
-        <Link to={`/post/modify/${post.id ?? post.postId}`}>수정</Link>
+        <Link to={`/post/modify/${post.id ?? post.postId}`} style={postButtonPrimaryStyle}>수정</Link>
         <button
           type="button"
           onClick={onDelete}
-          style={{
-            border: "1px solid #d11a2a",
-            color: "#d11a2a",
-            backgroundColor: "#fff",
-            padding: "6px 12px",
-            borderRadius: "6px",
-            cursor: "pointer"
-          }}
+          style={postButtonDangerStyle}
         >
           삭제
         </button>
-        <Link to="/post/list">목록으로</Link>
+        <Link to="/post/list" style={postButtonSecondaryStyle}>목록</Link>
       </div>
     </div>
   );
