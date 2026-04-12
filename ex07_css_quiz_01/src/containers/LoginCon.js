@@ -5,13 +5,11 @@ import {changeInput, initInput} from "../redux/inputSlice"
 import {loginThunk} from "../service/authThunk"
 import {useNavigate} from "react-router-dom"
 import { useEffect } from "react";
-import { initState } from "../redux/authSlice";
 const LoginCon = () => {
     const dispatch = useDispatch();
     
     useEffect( ()=>{
         dispatch( initInput() )
-        dispatch( initState() )
     },[dispatch])
 
 

@@ -11,6 +11,7 @@ import InfoCon from './containers/InfoCon';
 import HeaderCom from './components/common/HeaderCom';
 import ModifyCon from './containers/ModifyCon';
 import PostListCon from './containers/post/PostListCon';
+import PostDetailCon from './containers/post/PostDetailCon';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { initState } from './redux/authSlice';
@@ -29,6 +30,7 @@ function App() {
 
         <Route path='/post'>
           <Route path='list' element={<PostListCon />}/>
+          <Route path='detail/:id' element={<PostDetailCon />}/>
         </Route>
 
       </Route>
