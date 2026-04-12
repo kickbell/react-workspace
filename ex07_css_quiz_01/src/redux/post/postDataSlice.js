@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { postDeleteThunk, postOneThunk, postThunk } from "../../service/post/postThunk";
+import { postDeleteThunk, postOneThunk, postRegisterThunk, postThunk } from "../../service/post/postThunk";
 import { createLoadingReducers } from "../commonLoadingHandlers";
 
-const initialState = { data : null, dataOne : null, loading : false, error : null, deleteResult: 0 }
+const initialState = { data : null, dataOne : null, loading : false, error : null, deleteResult: 0, registerResult: 0 }
 const postDataSlice = createSlice({
   name : "postDataSlice",
   initialState : initialState,
@@ -29,9 +29,17 @@ const postDataSlice = createSlice({
       state.dataOne = null;
     })
 
+    builder
+    .addCase(postRegisterThunk.fulfilled, (state, action) => {
+      state.loading = false;
+      state.error = null;
+      state.registerResult = action.payload?.result ?? 1;
+    })
+
     createLoadingReducers(builder, postThunk)
     createLoadingReducers(builder, postOneThunk)
     createLoadingReducers(builder, postDeleteThunk)
+    createLoadingReducers(builder, postRegisterThunk)
   }
 })
 export default postDataSlice;

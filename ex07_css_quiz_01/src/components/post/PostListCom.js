@@ -14,7 +14,10 @@ function PostListCom({ posts }) {
 
   return (
     <div style={{ padding: "20px" }}>
-      <h2>게시물 목록</h2>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <h2>게시물 목록</h2>
+        <Link to="/post/register">게시글 추가하기</Link>
+      </div>
       <table
         style={{
           width: "100%",
