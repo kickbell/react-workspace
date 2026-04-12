@@ -6,23 +6,41 @@ function PostListCom({ posts }) {
   return (
     <div style={{ padding: "20px" }}>
       <h2>게시물 목록</h2>
-      <div style={{ display: "grid", gap: "20px" }}>
-        {posts.map((post) => (
-          <div
-            key={post.id}
-            style={{
-              border: "1px solid #ddd",
-              padding: "15px",
-              borderRadius: "8px",
-              boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-            }}
-          >
-            <h3>{post.title}</h3>
-            <p style={{ color: "#666", marginBottom: "10px" }}>{post.content}</p>
-            <small style={{ color: "#999" }}>작성자: {post.username}</small>
-          </div>
-        ))}
-      </div>
+      <table
+        style={{
+          width: "100%",
+          borderCollapse: "collapse",
+          marginTop: "12px",
+          backgroundColor: "#fff",
+        }}
+      >
+        <thead>
+          <tr style={{ backgroundColor: "#f5f7fa" }}>
+            <th style={{ border: "1px solid #d9dde3", padding: "10px" }}>번호</th>
+            <th style={{ border: "1px solid #d9dde3", padding: "10px" }}>제목</th>
+            <th style={{ border: "1px solid #d9dde3", padding: "10px" }}>내용</th>
+            <th style={{ border: "1px solid #d9dde3", padding: "10px" }}>작성자</th>
+          </tr>
+        </thead>
+        <tbody>
+          {posts.map((post, index) => (
+            <tr key={post.id ?? post.postId ?? index}>
+              <td style={{ border: "1px solid #e2e6ec", padding: "10px", textAlign: "center", width: "90px" }}>
+                {post.id ?? post.postId ?? index + 1}
+              </td>
+              <td style={{ border: "1px solid #e2e6ec", padding: "10px", width: "220px" }}>
+                {post.title ?? "-"}
+              </td>
+              <td style={{ border: "1px solid #e2e6ec", padding: "10px" }}>
+                {post.content ?? "-"}
+              </td>
+              <td style={{ border: "1px solid #e2e6ec", padding: "10px", width: "150px", textAlign: "center" }}>
+                {post.username ?? post.writer ?? "-"}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
