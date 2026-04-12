@@ -123,3 +123,53 @@ export const postRegisterThunk = createAsyncThunk(
     throw new Error(errorText || "게시글 등록 실패");
   }
 );
+
+export const postModifyThunk = createAsyncThunk(
+  "postModifyThunk",
+  async ( { id, title, content }, thunkAPI ) => {
+    const token = getToken(thunkAPI);
+    if (!token) {
+      throw new Error("로그인 먼저 하세요");
+    }
+
+    const query = new URLSearchParams({
+      title: String(title ?? ""),
+      content: String(content ?? "")
+    }).toString();
+
+    const endpoints = [
+      `/post/${id}?${query}`,
+      `/post/{id}?postId=${id}&${query}`,
+      `/post?postId=${id}&${query}`
+    ];
+
+    for (const endpoint of endpoints) {
+      const res = await fetch(path + endpoint, {
+        method : "put",
+        headers : {
+          "accept": "*/*",
+          "Authorization" : withBearer(token)
+        },
+        body : ""
+      } );
+
+      if (res.status === 404) {
+        continue;
+      }
+      if (res.status === 401) {
+        throw new Error("로그인 먼저 하세요");
+      }
+      if (res.status === 403) {
+        throw new Error("수정 권한 없음");
+      }
+      if (res.ok) {
+        return { result: 1, id };
+      }
+
+      const errorText = await res.text();
+      throw new Error(errorText || "게시글 수정 실패");
+    }
+
+    throw new Error("게시글 수정 API 경로를 찾지 못했습니다");
+  }
+);

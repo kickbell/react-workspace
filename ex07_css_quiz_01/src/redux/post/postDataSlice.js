@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { postDeleteThunk, postOneThunk, postRegisterThunk, postThunk } from "../../service/post/postThunk";
+import { postDeleteThunk, postModifyThunk, postOneThunk, postRegisterThunk, postThunk } from "../../service/post/postThunk";
 import { createLoadingReducers } from "../commonLoadingHandlers";
 
-const initialState = { data : null, dataOne : null, loading : false, error : null, deleteResult: 0, registerResult: 0 }
+const initialState = { data : null, dataOne : null, loading : false, error : null, deleteResult: 0, registerResult: 0, modifyResult: 0 }
 const postDataSlice = createSlice({
   name : "postDataSlice",
   initialState : initialState,
@@ -36,10 +36,24 @@ const postDataSlice = createSlice({
       state.registerResult = action.payload?.result ?? 1;
     })
 
+    builder
+    .addCase(postModifyThunk.fulfilled, (state, action) => {
+      state.loading = false;
+      state.error = null;
+      state.modifyResult = action.payload?.result ?? 1;
+      if (state.dataOne && String(state.dataOne.id ?? state.dataOne.postId) === String(action.payload?.id)) {
+        state.dataOne = {
+          ...state.dataOne,
+          updatedAt: new Date().toISOString()
+        };
+      }
+    })
+
     createLoadingReducers(builder, postThunk)
     createLoadingReducers(builder, postOneThunk)
     createLoadingReducers(builder, postDeleteThunk)
     createLoadingReducers(builder, postRegisterThunk)
+    createLoadingReducers(builder, postModifyThunk)
   }
 })
 export default postDataSlice;

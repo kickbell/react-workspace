@@ -13,6 +13,7 @@ import ModifyCon from './containers/ModifyCon';
 import PostListCon from './containers/post/PostListCon';
 import PostDetailCon from './containers/post/PostDetailCon';
 import PostRegisterCon from './containers/post/PostRegisterCon';
+import PostModifyCon from './containers/post/PostModifyCon';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { initState } from './redux/authSlice';
@@ -33,6 +34,7 @@ function App() {
           <Route path='list' element={<PostListCon />}/>
           <Route path='detail/:id' element={<PostDetailCon />}/>
           <Route path='register' element={<PostRegisterCon />}/>
+          <Route path='modify/:postId' element={<PostModifyCon />}/>
         </Route>
 
       </Route>

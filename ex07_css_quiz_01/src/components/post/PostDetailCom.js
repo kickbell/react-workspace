@@ -65,6 +65,7 @@ function PostDetailCom({ post, loading, error, onDelete }) {
       </table>
 
       <div style={{ marginTop: "16px", display: "flex", justifyContent: "flex-end", gap: "10px" }}>
+        <Link to={`/post/modify/${post.id ?? post.postId}`}>수정</Link>
         <button
           type="button"
           onClick={onDelete}
