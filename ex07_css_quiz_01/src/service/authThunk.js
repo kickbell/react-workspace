@@ -15,9 +15,17 @@ export const loginThunk = createAsyncThunk(
       headers : {"Content-Type" : "application/json"},
       body : JSON.stringify( user )
     } )
-    //const resResult = await res.json();
+    const resResult = await res.json();
     //console.log( "resResult : ", resResult)
-    return {result:await res.json(), username:user.username};
+
+    if (!res.ok) {
+      throw new Error(resResult?.detail || resResult?.title || "로그인 실패");
+    }
+
+    console.log("로그인 성공여부 : ", res.ok);
+
+    // Backend success format: { result: "<jwt-token>" }
+    return { result: 0, token: resResult?.result, username:user.username };
     
     //return (await res.json())
                     //?{result:0, username:user.username}:
